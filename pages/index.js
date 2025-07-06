@@ -1,9 +1,10 @@
-import Gallery from "@/components/Gallery";
+import Spotlight from "../components/Spotlight.jsx";
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Hello from Next.js</h1>
-    </div>
+    <main>
+      <h1>Spotlight</h1>
+      <Spotlight />
+    </main>
   );
 }
