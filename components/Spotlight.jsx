@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import ArtPiecePreview from "./ArtPiecePreview";
+import FavouriteButton from "./FavouriteButton";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -17,13 +18,16 @@ export default function Gallery() {
   const randomPiece = data[randomIndex];
 
   return (
-    <section>
+    <section style={{ position: "relative" }}>
       <ArtPiecePreview
         key={randomPiece.slug}
         image={randomPiece.imageSource}
         title={randomPiece.name}
         artist={randomPiece.artist}
       />
+      <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}>
+        <FavouriteButton artPieceId={randomPiece.slug} />
+      </div>
     </section>
   );
 }
