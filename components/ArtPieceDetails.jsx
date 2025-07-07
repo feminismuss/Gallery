@@ -1,8 +1,9 @@
 import Image from "next/image";
+import FavouriteButton from "./FavouriteButton";
 
 export default function ArtPieceDetails({ piece, onBack }) {
   return (
-    <section>
+    <section style={{ position: "relative" }}>
       <Image
         src={piece.imageSource}
         alt={piece.title}
@@ -13,8 +14,10 @@ export default function ArtPieceDetails({ piece, onBack }) {
       <p>Künstler: {piece.artist}</p>
       <p>Jahr: {piece.year}</p>
       <p>Genre: {piece.genre}</p>
-
-      <button onClick={onBack} Zurück zur Galerie></button>
+      <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}>
+        <FavouriteButton artPieceId={piece.slug} />
+      </div>
+      <button onClick={onBack}>Zurück zur Galerie</button>
     </section>
   );
 }
