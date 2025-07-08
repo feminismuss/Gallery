@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import ArtPiecePreview from "./ArtPiecePreview";
+import styled from "styled-components";
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+`;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -16,7 +25,7 @@ export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
   if (!artPieces) return null;
 
   return (
-    <section>
+    <FlexContainer>
       {artPieces.map((piece) => (
         <ArtPiecePreview
           key={piece.slug}
@@ -28,6 +37,6 @@ export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
           onToggleFavourite={toggleFavourite}
         />
       ))}
-    </section>
+    </FlexContainer>
   );
 }

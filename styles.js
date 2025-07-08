@@ -10,5 +10,12 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
+    background: lightgrey;
+    color:#0a0808;
+  }
+    h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem 0;
   }
 `;

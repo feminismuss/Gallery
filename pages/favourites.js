@@ -1,5 +1,14 @@
 import useSWR from "swr";
 import ArtPiecePreview from "@/components/ArtPiecePreview";
+import styled from "styled-components";
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+`;
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -21,20 +30,22 @@ export default function FavouritesPage({
     favourites.includes(piece.slug)
   );
   return (
-    <section>
+    <main>
       <h1>Meine Lieblingskunstwerke</h1>
-      {favouritePieces.length === 0 && <p>Du hast noch keine Favouriten.</p>}
-      {favouritePieces.map((piece) => (
-        <ArtPiecePreview
-          key={piece.slug}
-          image={piece.imageSource}
-          title={piece.name}
-          artist={piece.artist}
-          slug={piece.slug}
-          isFavourite={isFavourite(piece.slug)}
-          onToggleFavourite={toggleFavourite}
-        />
-      ))}
-    </section>
+      <FlexContainer>
+        {favouritePieces.length === 0 && <p>Du hast noch keine Favouriten.</p>}
+        {favouritePieces.map((piece) => (
+          <ArtPiecePreview
+            key={piece.slug}
+            image={piece.imageSource}
+            title={piece.name}
+            artist={piece.artist}
+            slug={piece.slug}
+            isFavourite={isFavourite(piece.slug)}
+            onToggleFavourite={toggleFavourite}
+          />
+        ))}
+      </FlexContainer>
+    </main>
   );
 }

@@ -1,5 +1,6 @@
 import GlobalStyle from "../styles";
 import { useState, useEffect } from "react";
+import Layout from "../components/Layout";
 
 export default function App({ Component, pageProps }) {
   const [favourites, setFavourites] = useState([]);
@@ -18,7 +19,7 @@ export default function App({ Component, pageProps }) {
   // umschalter
   const toggleFavourite = (slug) => {
     setFavourites((prev) =>
-      prev.includes(slug) ? prev.filter(id !== slug) : [...prev, slug]
+      prev.includes(slug) ? prev.filter((id) => id !== slug) : [...prev, slug]
     );
   };
   // pruefen ob es ein Favourit ist
@@ -27,12 +28,15 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component
-        {...pageProps}
-        favourites={favourites}
-        toggleFavourite={toggleFavourite}
-        isFavourite={isFavourite}
-      />
+      <Layout>
+        {" "}
+        <Component
+          {...pageProps}
+          favourites={favourites}
+          toggleFavourite={toggleFavourite}
+          isFavourite={isFavourite}
+        />
+      </Layout>
     </>
   );
 }
