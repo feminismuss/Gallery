@@ -2,13 +2,22 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  background: white;
+`;
+
 export default function Navigation() {
   const router = useRouter();
 
   const isActive = (path) => router.pathname === path;
 
   return (
-    <nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+    <Nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
       <Link
         href="/spotlight"
         style={{
@@ -24,7 +33,7 @@ export default function Navigation() {
         href="/gallery"
         style={{
           marginRight: "1rem",
-          fontWeight: isActive("/gallery") ? "bold" : "normal",
+          fontWeight: isActive("/spotlight") ? "bold" : "normal",
           textDecoration: "none",
         }}
       >
@@ -34,12 +43,13 @@ export default function Navigation() {
       <Link
         href="/favourites"
         style={{
-          fontWeight: isActive("/favourites") ? "bold" : "normal",
+          marginRight: "1rem",
+          fontWeight: isActive("/spotlight") ? "bold" : "normal",
           textDecoration: "none",
         }}
       >
         Favourites
       </Link>
-    </nav>
+    </Nav>
   );
 }

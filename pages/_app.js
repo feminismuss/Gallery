@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
   // umschalter
   const toggleFavourite = (slug) => {
     setFavourites((prev) =>
-      prev.includes(slug) ? prev.filter(id !== slug) : [...prev, slug]
+      prev.includes(slug) ? prev.filter((id) => id !== slug) : [...prev, slug]
     );
   };
   // pruefen ob es ein Favourit ist

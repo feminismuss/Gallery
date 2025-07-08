@@ -25,20 +25,18 @@ export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
   if (!artPieces) return null;
 
   return (
-    <section>
-      <FlexContainer>
-        {artPieces.map((piece) => (
-          <ArtPiecePreview
-            key={piece.slug}
-            image={piece.imageSource}
-            title={piece.name}
-            artist={piece.artist}
-            slug={piece.slug}
-            isFavourite={favourites.includes(piece.slug)}
-            onToggleFavourite={toggleFavourite}
-          />
-        ))}
-      </FlexContainer>
-    </section>
+    <FlexContainer>
+      {artPieces.map((piece) => (
+        <ArtPiecePreview
+          key={piece.slug}
+          image={piece.imageSource}
+          title={piece.name}
+          artist={piece.artist}
+          slug={piece.slug}
+          isFavourite={favourites.includes(piece.slug)}
+          onToggleFavourite={toggleFavourite}
+        />
+      ))}
+    </FlexContainer>
   );
 }

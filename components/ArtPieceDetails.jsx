@@ -28,10 +28,11 @@ export default function ArtPieceDetails({
         <Image
           src={piece.imageSource}
           alt={piece.title}
-          width={400}
-          height={300}
+          layout="responsive"
+          width={4}
+          height={3}
         />
-        
+
         <p>Künstler: {piece.artist}</p>
         <p>Jahr: {piece.year}</p>
         <p>Genre: {piece.genre}</p>
