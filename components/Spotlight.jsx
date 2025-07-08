@@ -1,9 +1,10 @@
 import useSWR from "swr";
 import ArtPiecePreview from "./ArtPiecePreview";
+import FavouriteButton from "./FavouriteButton";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Gallery() {
+export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
   const { data, error, isLoading } = useSWR(
     "https://example-apis.vercel.app/api/art",
     fetcher
@@ -17,12 +18,15 @@ export default function Gallery() {
   const randomPiece = data[randomIndex];
 
   return (
-    <section>
+    <section style={{ position: "relative" }}>
       <ArtPiecePreview
         key={randomPiece.slug}
         image={randomPiece.imageSource}
         title={randomPiece.name}
         artist={randomPiece.artist}
+        slug={randomPiece.slug}
+        isFavourite={isFavourite(randomPiece.slug)}
+        onToggleFavourite={toggleFavourite}
       />
     </section>
   );

@@ -1,30 +1,38 @@
 import GlobalStyle from "../styles";
-import { createContext, useContext, useState } from "react";
-
-const FavouritesContext = createContext();
-export function useFavourites() {
-  return useContext(FavouritesContext);
-}
+import { useState, useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   const [favourites, setFavourites] = useState([]);
 
-  const toggleFavourite = (id) => {
+  // Favouriten beim Start aus dem localStorage laden
+  useEffect(() => {
+    const stored = localStorage.getItem(favourites);
+    if (stored) setFavourites(JSON.parse(stored));
+  }, []);
+
+  // FAvouriten bei jeder Änderung wieder speichern
+  useEffect(() => {
+    localStorage.setItem(favourites, JSON.stringify(favourites));
+  }, [favourites]);
+
+  // umschalter
+  const toggleFavourite = (slug) => {
     setFavourites((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
+      prev.includes(slug) ? prev.filter(id !== slug) : [...prev, slug]
     );
   };
-
-  const isFavourite = (id) => favourites.includes(id);
+  // pruefen ob es ein Favourit ist
+  const isFavourite = (slug) => favourites.includes(slug);
 
   return (
     <>
       <GlobalStyle />
-      <FavouritesContext.Provider
-        value={{ favourites, toggleFavourite, isFavourite }}
-      >
-        <Component {...pageProps} />
-      </FavouritesContext.Provider>
+      <Component
+        {...pageProps}
+        favourites={favourites}
+        toggleFavourite={toggleFavourite}
+        isFavourite={isFavourite}
+      />
     </>
   );
 }
