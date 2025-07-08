@@ -1,10 +1,14 @@
 import Spotlight from "../components/Spotlight.jsx";
 
-export default function HomePage() {
+export default function HomePage({ favourites, toggleFavourite, isFavourite }) {
   return (
     <main>
       <h1>Spotlight</h1>
-      <Spotlight />
+      <Spotlight
+        favourites={favourites}
+        toggleFavourite={toggleFavourite}
+        isFavourite={isFavourite}
+      />
     </main>
   );
 }

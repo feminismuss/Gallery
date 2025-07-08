@@ -4,7 +4,7 @@ import FavouriteButton from "./FavouriteButton";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Gallery() {
+export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
   const { data, error, isLoading } = useSWR(
     "https://example-apis.vercel.app/api/art",
     fetcher
@@ -24,10 +24,10 @@ export default function Gallery() {
         image={randomPiece.imageSource}
         title={randomPiece.name}
         artist={randomPiece.artist}
+        slug={randomPiece.slug}
+        isFavourite={isFavourite(randomPiece.slug)}
+        onToggleFavourite={toggleFavourite}
       />
-      <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem" }}>
-        <FavouriteButton artPieceId={randomPiece.slug} />
-      </div>
     </section>
   );
 }

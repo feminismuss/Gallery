@@ -4,7 +4,11 @@ import ArtPieceDetails from "@/components/ArtPieceDetails";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function ArtPieceDetailPage() {
+export default function ArtPieceDetailPage({
+  favourites,
+  toggleFavourite,
+  isFavourite,
+}) {
   const router = useRouter();
   const { slug } = router.query;
 
@@ -20,5 +24,12 @@ export default function ArtPieceDetailPage() {
   const selectedPiece = data.find((piece) => piece.slug === slug);
   if (!selectedPiece) return <p>kein Bild? keine Details!</p>;
 
-  return <ArtPieceDetails piece={selectedPiece} onBack={() => router.back()} />;
+  return (
+    <ArtPieceDetails
+      piece={selectedPiece}
+      onBack={() => router.back()}
+      isFavourite={isFavourite(selectedPiece.slug)}
+      onToggleFavourite={() => toggleFavourite(selectedPiece.slug)}
+    />
+  );
 }

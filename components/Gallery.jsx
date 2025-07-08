@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import ArtPiecePreview from "./ArtPiecePreview";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Gallery() {
+export default function Gallery({ favourites, toggleFavourite, isFavourite }) {
   const {
     data: artPieces,
     error,
@@ -23,6 +24,8 @@ export default function Gallery() {
           title={piece.name}
           artist={piece.artist}
           slug={piece.slug}
+          isFavourite={favourites.includes(piece.slug)}
+          onToggleFavourite={toggleFavourite}
         />
       ))}
     </section>
